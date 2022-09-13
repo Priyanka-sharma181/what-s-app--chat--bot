@@ -48,7 +48,6 @@ const sendMessage=async(req,res)=>{
 }
 
 
-
 const webhookForText = async(req,res)=>{
     try {
         let contacts = req.body.contacts[0]
