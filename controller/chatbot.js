@@ -54,10 +54,10 @@ const webhookForText = async(req,res)=>{
         let contacts = req.body.contacts[0]
         let message = req.body.messages[0]
         if (message.type== "text") {
-            if(message.text.body.toLower() =="Hii"){
+            if(message.text.body =="Hii"){
               return `hii ${contacts.profile}`
             }
-          }if(message.text.body.toLower() =="bye"){
+          }if(message.text.body=="bye"){
              return `bye ${contacts.profile} will meet soon`
           }
     } catch (error) {
