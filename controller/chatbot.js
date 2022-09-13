@@ -51,17 +51,20 @@ const sendMessage=async(req,res)=>{
 
 const webhookForText = async(req,res)=>{
     try {
-
-        let contacts =JSON.stringify (req.body.contacts[0])
-        let jsonField = JSON.parse(contacts)
-        let message = JSON.stringify(req.body.messages[0])
-        let jsonField2=JSON.parse(message)
-        if (jsonField2.type== "text") {
-            if(jsonField2.text.body =="Hii"){
-              return `hii ${contacts.profile}`
+        let contacts = req.body.contacts[0]
+        let message = req.body.messages[0]
+        if (message.type== "text") { 
+          let data = {
+            "preview_url":false,
+            "recipient_type": "individual",
+            "to": `91${message.from.number}`,
+            "type":   "text",
+            "text": {
+              "body": `${message.text.body}`
+            }}          
+            if(message.text.body =="Hii"){
+              return sendMessage(data)
             }
-          }if(jsonField2.text.body=="bye"){
-             return `bye ${jsonField.profile} will meet soon`
           }
     } catch (error) {
         console.log(error);
