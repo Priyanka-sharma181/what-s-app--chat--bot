@@ -1,4 +1,5 @@
 const axios = require("axios");
+const path = require("path");
 const { sendTextMessage, sendImage, sendAudio } = require("./messages");
 
 const sendMessage=async(req,res)=>{
@@ -63,8 +64,18 @@ const webhookForText = async(req,res)=>{
               }
           }
           let id = await sendTextMessage(data)
-          }if(message.text.body=="image"){
-            let image = "Albert-einstein.jpeg"
+          }if(message.text.body=='bye'){
+            let data = {"preview_url":false,
+            "to":contacts.wa_id, 
+            "recipient_type": "individual",
+            "type":"text",
+            "text":{
+                "body":`bye ${contacts.profile.name} will meet soon`
+              }
+          }
+          let id = await sendTextMessage(data)
+          }  if(message.text.body=="image"){
+            let image = path.join(__dirname,"../imagex")
             let  response = await axios.post(
            "https://whatsapp.turn.io/v1/media",
           a,
