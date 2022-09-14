@@ -69,6 +69,7 @@ const webhookForText = async(req,res)=>{
                 "text": {
                   "body": "hlw"
                 }}
+                console.log(data);
                 return sendTextMessage(data)
                    
             }
