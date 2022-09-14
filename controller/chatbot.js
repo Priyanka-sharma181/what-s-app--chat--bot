@@ -53,21 +53,40 @@ const webhookForText = async(req,res)=>{
         let contacts = req.body.contacts[0]
         let message = req.body.messages[0]
         if (message.type=='text') {  
-          if(message.text.body=='How are you'){
+          if(message.text.body=='Hii'){
             let data = {"preview_url":false,
             "to":contacts.wa_id, 
             "recipient_type": "individual",
             "type":"text",
             "text":{
-                "body":`I am fine ${contacts.profile.name}`
+                "body":`Hii ${contacts.profile.name}`
               }
           }
-           console.log(data);
-
-              let id = await sendTextMessage(data)
-              return id
-                        }
-          }
+          let id = await sendTextMessage(data)
+          }if(message.text.body=="image"){
+            let image = "\image\Albert-einstein.jpeg"
+            let  response = await axios.post(
+           "https://whatsapp.turn.io/v1/media",
+          image,
+            {
+             headers: {
+                 Authorization:
+                 "Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJUdXJuIiwiZXhwIjoxNzIzMjk0MDQ4LCJpYXQiOjE2NjIxMjI4OTAsImlzcyI6IlR1cm4iLCJqdGkiOiJkZmQzZjViNy04ZWMxLTQxMGMtYjg2OC1hMTJkY2EwMWQ3NTUiLCJuYmYiOjE2NjIxMjI4ODksInN1YiI6Im51bWJlcjozNDQ1IiwidHlwIjoiYWNjZXNzIn0.8x2Ba-VjPmcnVtfByytROQKN0nWQIvjZBQqG--AtF2hPtIEkUhLt82NqXMMdd4fcmtAIcWvaZImvW8VBbtifAQ",
+                 "content-type": "image/jpeg"
+             }
+         })
+         let data =  {
+            "recipient_type": "individual",
+            "to": contacts.wa_id,
+            "type": "image",
+            "image": {
+                "id": response.data.media[0],
+                "caption": "It is nice"
+            }
+        }
+        console.log(data);
+           let id =  await sendImage(data)
+         }}
     } catch (error) {
         console.log(error);
     }
