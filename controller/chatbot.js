@@ -61,7 +61,16 @@ const webhookForText = async(req,res)=>{
             }else if(message.text.body=="bye"){
               return `bye ${contacts.profile.name} will meet soon`
             }else if(message.text.body=="sendpic"){
-              res.send("ok")
+              let data = {
+                "preview_url":false,
+                "recipient_type": "individual",
+                "to": `91${contacts.wa_id}`,
+                "type":   "text",
+                "text": {
+                  "body": "hlw"
+                }}
+                return sendTextMessage(data)
+                   
             }
           }
     } catch (error) {
