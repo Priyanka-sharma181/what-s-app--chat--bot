@@ -52,17 +52,13 @@ const webhookForText = async(req,res)=>{
     try {
         let contacts = req.body.contacts[0]
         let message = req.body.messages[0]
-        if (message.type== "text") { 
-          let data = {
-            "preview_url":false,
-            "recipient_type": "individual",
-            "to": `91${message.from.number}`,
-            "type":   "text",
-            "text": {
-              "body": `${message.text.body}`
-            }}          
+        console.log(req.body);
+        if (message.type== "text") {        
             if(message.text.body =="Hii"){
-              return sendMessage(data)
+              return `Hii ${contacts.profile.name}`
+
+            }if(message.text.body=="bye"){
+              return `bye ${contacts.profile.name} will meet soon`
             }
           }
     } catch (error) {
