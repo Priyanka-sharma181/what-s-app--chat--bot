@@ -52,7 +52,6 @@ const webhookForText = async(req,res)=>{
     try {
         let contacts = req.body.contacts[0]
         let message = req.body.messages[0]
-        console.log(message);
         if (message.type=='text') {  
           if(message.text.body=='Hii'){
             let data = {"preview_url":false,
@@ -76,7 +75,7 @@ const webhookForText = async(req,res)=>{
                  "content-type": "image/jpeg"
              }
          })
-         console.log(response.data.media[0])
+         console.log(response.data.media[0],"ok")
          let data =  {
             "recipient_type": "individual",
             "to": contacts.wa_id,
@@ -86,7 +85,7 @@ const webhookForText = async(req,res)=>{
                 "caption": "It is nice"
             }
         }
-        console.log(data);
+        console.log(data,"image data");
            let id =  await sendImage(data)
          }}
     } catch (error) {
