@@ -57,7 +57,7 @@ const webhookForText = async(req,res)=>{
         let message = req.body.messages[0]
         if (message.type== "text") {        
             if(message.text.body =="Hii"){
-              return `Hii ${contacts.profile.name}`
+              res.send( `Hii ${contacts..profile.name}`)
 
             }if(message.text.body=="bye"){
               return `bye ${contacts.profile.name} will meet soon`
