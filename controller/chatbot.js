@@ -51,6 +51,7 @@ const sendMessage=async(req,res)=>{
 const webhookForText = async(req,res)=>{
 
     try {
+      console.log(req.body);
         let contacts = req.body.contacts[0]
         let message = req.body.messages[0]
         if (message.type== 'text') {        
