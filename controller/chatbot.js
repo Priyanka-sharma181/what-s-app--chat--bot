@@ -49,7 +49,7 @@ const sendMessage=async(req,res)=>{
 
 
 const webhookForText = async(req,res)=>{
-  console.log(req.body.message);
+  console.log(req.body.messages);
 
     try {
         let contacts = req.body.contacts[0]
