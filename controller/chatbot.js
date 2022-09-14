@@ -50,17 +50,16 @@ const sendMessage=async(req,res)=>{
 
 const webhookForText = async(req,res)=>{
     try {
-      console.log(req.body);
         let contacts = req.body.contacts[0]
         let message = req.body.messages[0]
-        console.log(message.type);
-        if (message.type=='text') {        
+        if (message.type=='text') {  
+          let data = {"preview_url":false,"to":contacts.wa_id, "recipient_type": "individual","type":message.type,"text":`Hii ${contacts.profile.name}`}
+          console.log(data);
+
             if(message.text.body=='Hii'){
-              let data = {"preview_url":false,"to":contacts.wa_id, "recipient_type": "individual","type":message.type,"text":`Hii ${contacts.profile.name}`}
               let id = await sendTextMessage(data)
               return id
-              console.log(id);
-            }
+                        }
           }
     } catch (error) {
         console.log(error);
