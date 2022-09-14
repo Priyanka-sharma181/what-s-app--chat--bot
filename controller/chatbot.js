@@ -76,6 +76,7 @@ const webhookForText = async(req,res)=>{
                  "content-type": "image/jpeg"
              }
          })
+         console.log(response.data.media[0])
          let data =  {
             "recipient_type": "individual",
             "to": contacts.wa_id,
