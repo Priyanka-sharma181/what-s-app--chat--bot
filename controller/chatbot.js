@@ -49,12 +49,12 @@ const sendMessage=async(req,res)=>{
 
 
 const webhookForText = async(req,res)=>{
-  console.log(req.body.messages);
 
     try {
         let contacts = req.body.contacts[0]
+        console.log(req.body.messages);
+
         let message = req.body.messages[0]
-        console.log(message);
         if (message.type== "text") {        
             if(message.text.body =="Hii"){
               return `Hii ${contacts.profile.name}`
