@@ -56,22 +56,9 @@ const webhookForText = async(req,res)=>{
         console.log(message.type);
         if (message.type=='text') {        
             if(message.text.body=='Hii'){
-              console.log(message.text.body);
-              return `Hii ${contacts.profile.name}`
-            }else if(message.text.body=="bye"){
-              return `bye ${contacts.profile.name} will meet soon`
-            }else if(message.text.body=="sendpic"){
-              let data = {
-                "preview_url":false,
-                "recipient_type": "individual",
-                "to": `91${contacts.wa_id}`,
-                "type":   "text",
-                "text": {
-                  "body": "hlw"
-                }}
-                console.log(data);
-                return sendTextMessage(data)
-                   
+              let data = {"preview_url":false,"to":contacts.wa_id, "recipient_type": "individual","type":message.type,"text":`Hii ${contacts.profile.name}`}
+              let id = sendTextMessage(data)
+              console.log(id);
             }
           }
     } catch (error) {
