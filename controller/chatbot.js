@@ -65,9 +65,10 @@ const webhookForText = async(req,res)=>{
           let id = await sendTextMessage(data)
           }if(message.text.body=="image"){
             let image = "\image\Albert-einstein.jpeg"
+             let a =   Buffer.from(image);
             let  response = await axios.post(
            "https://whatsapp.turn.io/v1/media",
-          image,
+          a,
             {
              headers: {
                  Authorization:
