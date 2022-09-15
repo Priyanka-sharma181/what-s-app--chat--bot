@@ -21,7 +21,7 @@ const sendMessage=async(req,res)=>{
      }
     if(req.files){
        let details = req.files.file.data;
-       console.log(details);
+      //  console.log(details);
        let mimtype = req.files.file.mimetype;
        let arr = mimtype.split("/")
        let  response = await axios.post(
@@ -93,21 +93,21 @@ const webhookForText = async(req,res)=>{
           let id = await sendTextMessage(data)
         
           }
-        //   if(message.text.body=="cat"){
-        //   const photo = await axios.get(`https://pixabay.com/api/?key=29946717-3800392e516e7a0f0961e4a37&q=cat&image_type=photo`)
-        //   console.log(photo.data.hits[0].previewURL);
-        //   let d = {
-        //       "preview_url":true,
-        //       "recipient_type": "individual",
-        //       "to": `91${contacts.wa_id}`,
-        //       "type": "text",
-        //       "text": {
-        //           "body":`${photo.data.hits[0].previewURL}`
-        //       }
-        //    }
-        //  let id  = sendTextMessage(d)
-          // }
+        
          }
+         if(message.type=="image"){
+          let data = {
+            "preview_url":false,
+            "to":contacts.wa_id, 
+            "recipient_type": "individual",
+            "type":"text",
+            "text":{
+                "body":`Nice picture ${contacts.profile.name}`
+              }
+          }
+          let id = sendTextMessage(data)
+         }
+
     } catch (error) {
         console.log(error);
     }
