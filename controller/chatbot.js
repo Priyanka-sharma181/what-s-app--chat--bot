@@ -88,17 +88,17 @@ const webhookForText = async(req,res)=>{
              }
          })
          console.log(response.data.media[0],"ok")
-         let data =  {
-            "recipient_type": "individual",
-            "to": contacts.wa_id,
-            "type": "image",
-            "image": {
-                "id": response.data.media[0],
-                "caption": "It is nice"
-            }
-        }
-        console.log(data,"image data");
-           let id =  await sendImage(data)
+        //  let data =  {
+        //     "recipient_type": "individual",
+        //     "to": contacts.wa_id,
+        //     "type": "image",
+        //     "image": {
+        //         "id": response.data.media[0],
+        //         "caption": "It is nice"
+        //     }
+        // }
+        // console.log(data,"image data");
+        //    let id =  await sendImage(data)
          }}
     } catch (error) {
         console.log(error);
