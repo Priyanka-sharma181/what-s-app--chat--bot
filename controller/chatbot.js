@@ -65,6 +65,7 @@ const getPhoto = async(Name)=>{
 
 
 const webhookForText = async(req,res)=>{
+  console.log(req.body);
     try {
         let contacts = req.body.contacts[0]
         let message = req.body.messages[0]
@@ -92,7 +93,7 @@ const webhookForText = async(req,res)=>{
           let id = await sendTextMessage(data)
         
           }if(message.text.body=="cat"){
-          const photo = await axios.get(`https://pixabay.com/api/?key=29946717-3800392e516e7a0f0961e4a37&q=${"cat"}&image_type=photo&pretty=true`)
+          const photo = await axios.get(`https://pixabay.com/api/?key=29946717-3800392e516e7a0f0961e4a37&q=cat&image_type=photo`)
           console.log(photo.data.hits[0].previewURL);
           let d = {
               "preview_url":true,
