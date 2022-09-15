@@ -121,15 +121,15 @@ const webhookForText = async(req,res)=>{
          }
          if(message.type=="image"){
           let data = {
-            "preview_url":false,
             "to":contacts.wa_id, 
             "recipient_type": "individual",
-            "type":"text",
-            "text":{
-                "body":`Nice picture ${contacts.profile.name}`
+            "type":"image",
+            "image":{
+              "id":`${message.image.id}`,
+              "caption:":`Nice picture ${contacts.profile.name}`
               }
           }
-          let id = sendTextMessage(data)
+          let id = sendImage(data)
          }
 
     } catch (error) {
