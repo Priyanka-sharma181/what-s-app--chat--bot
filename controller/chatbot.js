@@ -1,5 +1,4 @@
 const axios = require("axios");
-const path = require("path");
 require("dotenv").config()
 const { sendTextMessage, sendImage, sendAudio } = require("./messages");
 
@@ -65,7 +64,6 @@ const getPhoto = async(Name)=>{
 
 
 const webhookForText = async(req,res)=>{
-  console.log(req.body);
     try {
         let contacts = req.body.contacts[0]
         let message = req.body.messages[0]
@@ -91,9 +89,33 @@ const webhookForText = async(req,res)=>{
               }
           }
           let id = await sendTextMessage(data)
-        
-          }
-        
+          }if(message.text.body=="sendpic"){
+            let image =await axios.get('https://www.buildquickbots.com/whatsapp/media/sample/jpg/sample01.jpg')
+            let  response = await axios.post(
+              "https://whatsapp.turn.io/v1/media",
+              image.data,
+              {
+                  headers: {
+                      Authorization:
+                      "Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJUdXJuIiwiZXhwIjoxNzIzMjk0MDQ4LCJpYXQiOjE2NjIxMjI4OTAsImlzcyI6IlR1cm4iLCJqdGkiOiJkZmQzZjViNy04ZWMxLTQxMGMtYjg2OC1hMTJkY2EwMWQ3NTUiLCJuYmYiOjE2NjIxMjI4ODksInN1YiI6Im51bWJlcjozNDQ1IiwidHlwIjoiYWNjZXNzIn0.8x2Ba-VjPmcnVtfByytROQKN0nWQIvjZBQqG--AtF2hPtIEkUhLt82NqXMMdd4fcmtAIcWvaZImvW8VBbtifAQ",
+                      "content-type": "image/jpeg"
+                  }
+                 })
+                let data = {
+                  "preview_url":false,
+                  "to":contacts.wa_id, 
+                  "recipient_type": "individual",
+                  "type":"image",
+                  "image":{
+                    "id":`${response.data.media[0].id}`
+                    }
+                }
+                console.log(data);
+                let = await sendImage(data)
+
+                 
+              }
+
          }
          if(message.type=="image"){
           let data = {
