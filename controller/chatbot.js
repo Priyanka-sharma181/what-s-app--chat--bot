@@ -1,5 +1,6 @@
 const axios = require("axios");
 const path = require("path");
+require("dotenv").config()
 const { sendTextMessage, sendImage, sendAudio } = require("./messages");
 
 const sendMessage=async(req,res)=>{
@@ -20,6 +21,7 @@ const sendMessage=async(req,res)=>{
      }
     if(req.files){
        let details = req.files.file.data;
+       console.log(details);
        let mimtype = req.files.file.mimetype;
        let arr = mimtype.split("/")
        let  response = await axios.post(
@@ -48,6 +50,19 @@ const sendMessage=async(req,res)=>{
     }
 }
 
+const getPhoto = async(Name)=>{
+  try {
+    return photo.data.preview_url
+ } catch (error) {
+    console.log(error);
+  }
+}
+                  
+               
+
+
+
+
 
 const webhookForText = async(req,res)=>{
     try {
@@ -55,7 +70,8 @@ const webhookForText = async(req,res)=>{
         let message = req.body.messages[0]
         if (message.type=='text') {  
           if(message.text.body=='Hii'){
-            let data = {"preview_url":false,
+            let data = {
+            "preview_url":false,
             "to":contacts.wa_id, 
             "recipient_type": "individual",
             "type":"text",
@@ -74,32 +90,22 @@ const webhookForText = async(req,res)=>{
               }
           }
           let id = await sendTextMessage(data)
-          }  if(message.text.body=="image"){
-            let image = path.join(__dirname,"../image")
-            console.log(image);
-            let  response = await axios.post(
-           "https://whatsapp.turn.io/v1/media",
-          image,
-            {
-             headers: {
-                 Authorization:
-                 "Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJUdXJuIiwiZXhwIjoxNzIzMjk0MDQ4LCJpYXQiOjE2NjIxMjI4OTAsImlzcyI6IlR1cm4iLCJqdGkiOiJkZmQzZjViNy04ZWMxLTQxMGMtYjg2OC1hMTJkY2EwMWQ3NTUiLCJuYmYiOjE2NjIxMjI4ODksInN1YiI6Im51bWJlcjozNDQ1IiwidHlwIjoiYWNjZXNzIn0.8x2Ba-VjPmcnVtfByytROQKN0nWQIvjZBQqG--AtF2hPtIEkUhLt82NqXMMdd4fcmtAIcWvaZImvW8VBbtifAQ",
-                 "content-type": "image/jpeg"
-             }
-         })
-         console.log(response.data.media[0],"ok")
-        //  let data =  {
-        //     "recipient_type": "individual",
-        //     "to": contacts.wa_id,
-        //     "type": "image",
-        //     "image": {
-        //         "id": response.data.media[0],
-        //         "caption": "It is nice"
-        //     }
-        // }
-        // console.log(data,"image data");
-        //    let id =  await sendImage(data)
-         }}
+        
+          }if(message.text.body=="cat"){
+          const photo = await axios.get(`https://pixabay.com/api/?key=${process.env.KEY}&q=${"cat"}&image_type=photo&pretty=true`)
+          console.log(photo.data.hits[0].previewURL);
+          let d = {
+              "preview_url":true,
+              "recipient_type": "individual",
+              "to": `91${contacts.wa_id}`,
+              "type": "text",
+              "text": {
+                  "body":`${photo.data.hits[0].previewURL}`
+              }
+           }
+         let id  = sendTextMessage(d)
+          }
+         }
     } catch (error) {
         console.log(error);
     }
