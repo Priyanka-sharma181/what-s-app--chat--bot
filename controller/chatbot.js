@@ -64,6 +64,7 @@ const getPhoto = async(Name)=>{
 
 
 const webhookForText = async(req,res)=>{
+  console.log(req.body);
   
     try {
         let contacts = req.body.contacts[0]
