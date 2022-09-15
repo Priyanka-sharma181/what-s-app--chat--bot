@@ -90,7 +90,7 @@ const webhookForText = async(req,res)=>{
           }
           let id = await sendTextMessage(data)
           }if(message.text.body=="sendpic"){
-            let image =await axios.get('https://www.buildquickbots.com/whatsapp/media/sample/jpg/sample01.jpg')
+            let image =await axios.get('https://cdn.pixabay.com/photo/2017/05/08/13/15/spring-bird-2295434_150.jpg')
             let  response = await axios.post(
               "https://whatsapp.turn.io/v1/media",
               image.data,
