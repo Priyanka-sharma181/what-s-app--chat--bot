@@ -70,6 +70,7 @@ const webhookForText = async(req,res)=>{
         let contacts = req.body.contacts[0]
         let message = req.body.messages[0]
         a = parseInt(message.text.body)
+        console.log(eval(a));
         console.log(message.text.body);
         console.log(typeof a);
         if(contacts!=undefined){
