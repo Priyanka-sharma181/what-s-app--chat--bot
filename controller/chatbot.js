@@ -69,6 +69,7 @@ const webhookForText = async(req,res)=>{
     try {
         let contacts = req.body.contacts[0]
         let message = req.body.messages[0]
+        console.log(message.body.text);
         if(contacts!=undefined){          
           if (message.type=='text') {  
             if(message.text.body=='Hii'){
@@ -118,7 +119,7 @@ const webhookForText = async(req,res)=>{
            else{
             res.send("contact undefined")
            }
-          req.status(200)
+          req.send("ok")
         }
        
 
