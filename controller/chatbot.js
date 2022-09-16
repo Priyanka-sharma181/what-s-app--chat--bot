@@ -115,10 +115,7 @@ const webhookForText = async(req,res)=>{
               }
             }
             let id = sendTextMessage(data)
-           }
-           else{
-            res.send("contact undefined")
-           }
+          }
           res.send("ok")
         }
        
