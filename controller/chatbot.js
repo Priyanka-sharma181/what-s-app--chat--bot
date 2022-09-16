@@ -93,13 +93,13 @@ const webhookForText = async(req,res)=>{
                 }
             }
             let id = await sendTextMessage(data)
-            }if(message.text.body==`${7+9}`){
+            }if(message.text.body=="how"){
               let data  = {"preview_url":false,
               "to":contacts.wa_id, 
               "recipient_type": "individual",
               "type":"text",
               "text":{
-                  "body":`${eval(message.text.body)}`
+                  "body":`${message.text.body}`
                 }
             }
             let id = sendTextMessage(data)
