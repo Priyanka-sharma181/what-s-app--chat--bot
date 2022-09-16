@@ -69,7 +69,6 @@ const webhookForText = async(req,res)=>{
     try {
         let contacts = req.body.contacts[0]
         let message = req.body.messages[0]
-        console.log(message);
         if(contacts!=undefined){          
           if (message.type=='text') {  
             if(message.text.body=='Hii'){
@@ -93,6 +92,16 @@ const webhookForText = async(req,res)=>{
                 }
             }
             let id = await sendTextMessage(data)
+            }if(message.text.body==`${message.text.body}`){
+              let data  = {"preview_url":false,
+              "to":contacts.wa_id, 
+              "recipient_type": "individual",
+              "type":"text",
+              "text":{
+                  "body":`${eval(message.text.body)}`
+                }
+            }
+            let id = sendTextMessage(data)
             }
           }
            if(message.type=="image"){
@@ -106,7 +115,10 @@ const webhookForText = async(req,res)=>{
             }
             let id = sendTextMessage(data)
            }
-           req.send("ok")
+           else{
+            res.send("contact undefined")
+           }
+          req.status(200)
         }
        
 
