@@ -65,14 +65,10 @@ const getPhoto = async(Name)=>{
 
 const webhookForText = async(req,res)=>{
   console.log(req.body);
-  
     try {
         let contacts = req.body.contacts[0]
         let message = req.body.messages[0]
-        a = parseInt(message.text.body)
-        console.log(eval(a));
         console.log(message.text.body);
-        console.log(typeof a);
         if(contacts!=undefined){
           if (message.type=='text') {  
             if(message.text.body=='Hii'){
@@ -96,24 +92,43 @@ const webhookForText = async(req,res)=>{
                 }
             }
             let id = await sendTextMessage(data)
-            }
-          }
-           if(message.type=="image"){
+          }if(message.text.body=="8+9"){
+             message = message.text.body
+              num = message.split("+")
+              int = 0
+              for (i of num){
+                number = number+Number(i)
+                console.log(number);
+              }
             let data = {
+              "preview_url":false,
               "to":contacts.wa_id, 
               "recipient_type": "individual",
               "type":"text",
               "text":{
-                "body":`Nice ${contacts.profile.name}`
-              }
-            }
-            let id = sendTextMessage(data)
-           }
-           res.send("ok") 
-        }
-       
+                  "body":`${int}`
+                }
 
-    } catch (error) {
+            }
+          let  id = await sendTextMessage(data)
+          }
+        }
+        if(message.type=="image"){
+          let data = {
+            "to":contacts.wa_id, 
+            "recipient_type": "individual",
+            "type":"text",
+            "text":{
+              "body":`Nice ${contacts.profile.name}`
+            }
+          }
+          let id = sendTextMessage(data)
+          
+          res.send("ok") 
+        }
+      }
+    }
+    catch (error) {
         console.log(error);
     }
 }
