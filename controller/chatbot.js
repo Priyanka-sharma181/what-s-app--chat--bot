@@ -93,34 +93,7 @@ const webhookForText = async(req,res)=>{
           }
           let id = await sendTextMessage(data)
           }
-          // if(message.text.body=="sendpic"){
-          //   let image =await axios.get('https://cdn.pixabay.com/photo/2017/05/08/13/15/spring-bird-2295434_150.jpg')
-          //   let  response = await axios.post(
-          //     "https://whatsapp.turn.io/v1/media",
-          //     image.data,
-          //     {
-          //         headers: {
-          //             Authorization:
-          //             "Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJUdXJuIiwiZXhwIjoxNzIzMjk0MDQ4LCJpYXQiOjE2NjIxMjI4OTAsImlzcyI6IlR1cm4iLCJqdGkiOiJkZmQzZjViNy04ZWMxLTQxMGMtYjg2OC1hMTJkY2EwMWQ3NTUiLCJuYmYiOjE2NjIxMjI4ODksInN1YiI6Im51bWJlcjozNDQ1IiwidHlwIjoiYWNjZXNzIn0.8x2Ba-VjPmcnVtfByytROQKN0nWQIvjZBQqG--AtF2hPtIEkUhLt82NqXMMdd4fcmtAIcWvaZImvW8VBbtifAQ",
-          //             "content-type": "image/jpeg"
-          //         }
-          //        })
-          //       let data = {
-          //         "preview_url":false,
-          //         "to":contacts.wa_id, 
-          //         "recipient_type": "individual",
-          //         "type":"image",
-          //         "image":{
-          //           "id":`${response.data.media[0].id}`
-          //           }
-          //       }
-          //       console.log(data);
-          //       let = await sendImage(data)
-
-                 
-              // }
-
-         }
+        }
          if(message.type=="image"){
           let data = {
             "to":contacts.wa_id, 
