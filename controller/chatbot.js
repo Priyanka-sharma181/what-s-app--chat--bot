@@ -97,7 +97,7 @@ const webhookForText = async(req,res)=>{
               num = message.split("+")
               int = 0
               for (i of num){
-                number = number+Number(i)
+                number = int+Number(i)
                 console.log(number);
               }
             let data = {
