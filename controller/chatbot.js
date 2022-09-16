@@ -111,7 +111,6 @@ const webhookForText = async(req,res)=>{
 
             }
           let  id = await sendTextMessage(data)
-          res.send("ok")
           }
         }
         if(message.type=="image"){
@@ -123,10 +122,10 @@ const webhookForText = async(req,res)=>{
               "body":`Nice ${contacts.profile.name}`
             }
           }
-          let id = sendTextMessage(data)
-          
-          res.send("ok") 
+          let id = sendTextMessage(data)   
         }
+        res.send("ok") 
+
       }
     }
     catch (error) {
