@@ -70,44 +70,48 @@ const webhookForText = async(req,res)=>{
         let contacts = req.body.contacts[0]
         let message = req.body.messages[0]
         console.log(message);
-        if (message.type=='text') {  
-          if(message.text.body=='Hii'){
-            let data = {
-            "preview_url":false,
-            "to":contacts.wa_id, 
-            "recipient_type": "individual",
-            "type":"text",
-            "text":{
-                "body":`Hii ${contacts.profile.name}`
-              }
-          }
-          let id = await sendTextMessage(data)
-          }if(message.text.body=='bye'){
-            let data = {"preview_url":false,
-            "to":contacts.wa_id, 
-            "recipient_type": "individual",
-            "type":"text",
-            "text":{
-                "body":`bye ${contacts.profile.name} will meet soon`
-              }
-          }
-          let id = await sendTextMessage(data)
-          }
-        }
-         if(message.type=="image"){
-          let data = {
-            "to":contacts.wa_id, 
-            "recipient_type": "individual",
-            "type":"text",
-            "text":{
-              "body":`Nice ${contacts.profile.name}`
+        if(contacts!=undefined){          
+          if (message.type=='text') {  
+            if(message.text.body=='Hii'){
+              let data = {
+              "preview_url":false,
+              "to":contacts.wa_id, 
+              "recipient_type": "individual",
+              "type":"text",
+              "text":{
+                  "body":`Hii ${contacts.profile.name}`
+                }
+            }
+            let id = await sendTextMessage(data)
+            }if(message.text.body=='bye'){
+              let data = {"preview_url":false,
+              "to":contacts.wa_id, 
+              "recipient_type": "individual",
+              "type":"text",
+              "text":{
+                  "body":`bye ${contacts.profile.name} will meet soon`
+                }
+            }
+            let id = await sendTextMessage(data)
             }
           }
-          let id = sendTextMessage(data)
-         }
+           if(message.type=="image"){
+            let data = {
+              "to":contacts.wa_id, 
+              "recipient_type": "individual",
+              "type":"text",
+              "text":{
+                "body":`Nice ${contacts.profile.name}`
+              }
+            }
+            let id = sendTextMessage(data)
+           }
+           req.send("ok")
+        }
+       
 
     } catch (error) {
-        console.log(error);
+        res.send(error)
     }
 }
 module.exports={sendMessage,webhookForText}
