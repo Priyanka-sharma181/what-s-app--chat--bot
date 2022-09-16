@@ -119,7 +119,7 @@ const webhookForText = async(req,res)=>{
            else{
             res.send("contact undefined")
            }
-          req.send("ok")
+          res.send("ok")
         }
        
 
