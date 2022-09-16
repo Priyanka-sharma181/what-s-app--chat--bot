@@ -97,8 +97,8 @@ const webhookForText = async(req,res)=>{
               num = message.split("+")
               int = 0
               for (i of num){
-                number = int+Number(i)
-                console.log(number);
+                int = int+Number(i)
+                console.log(int);
               }
             let data = {
               "preview_url":false,
@@ -111,6 +111,7 @@ const webhookForText = async(req,res)=>{
 
             }
           let  id = await sendTextMessage(data)
+          res.send("ok")
           }
         }
         if(message.type=="image"){
