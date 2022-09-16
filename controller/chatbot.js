@@ -70,7 +70,8 @@ const webhookForText = async(req,res)=>{
         let contacts = req.body.contacts[0]
         let message = req.body.messages[0]
         console.log(message.text.body);
-        if(contacts!=undefined){          
+        console.log(typeof message.text.body);
+        if(contacts!=undefined){
           if (message.type=='text') {  
             if(message.text.body=='Hii'){
               let data = {
@@ -93,16 +94,6 @@ const webhookForText = async(req,res)=>{
                 }
             }
             let id = await sendTextMessage(data)
-            }if(message.text.body==`${4+4}`){
-              let data  = {"preview_url":false,
-              "to":contacts.wa_id, 
-              "recipient_type": "individual",
-              "type":"text",
-              "text":{
-                  "body":`${message.text.body}`
-                }
-            }
-            let id = sendTextMessage(data)
             }
           }
            if(message.type=="image"){
@@ -115,13 +106,13 @@ const webhookForText = async(req,res)=>{
               }
             }
             let id = sendTextMessage(data)
-          }
-          res.send("ok")
+           }
+           res.send("ok") 
         }
        
 
     } catch (error) {
-        res.send(error)
+        console.log(error);
     }
 }
 module.exports={sendMessage,webhookForText}
