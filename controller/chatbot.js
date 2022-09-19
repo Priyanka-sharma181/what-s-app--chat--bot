@@ -57,18 +57,10 @@ const getPhoto = async(Name)=>{
   }
 }
                   
-               
-
-
-
-
-
 const webhookForText = async(req,res)=>{
-  console.log(req.body);
     try {
         let contacts = req.body.contacts[0]
         let message = req.body.messages[0]
-        console.log(message.text.body);
         if(contacts!=undefined){
           if (message.type=='text') {  
             if(message.text.body=='Hii'){
@@ -92,26 +84,8 @@ const webhookForText = async(req,res)=>{
                 }
             }
             let id = await sendTextMessage(data)
-          }if(message.text.body=="8+9"){
-             message = message.text.body
-              num = message.split("+")
-              int = 0
-              for (i of num){
-                int = int+Number(i)
-                console.log(int);
-              }
-            let data = {
-              "preview_url":false,
-              "to":contacts.wa_id, 
-              "recipient_type": "individual",
-              "type":"text",
-              "text":{
-                  "body":`${int}`
-                }
-
-            }
-          let  id = await sendTextMessage(data)
           }
+          res.send("ok")
         }
         if(message.type=="image"){
           let data = {
